@@ -1,394 +1,1213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Brain Diet — Aditi Sahay</title>
-  <meta name="description" content="Nine months. Nine disciplines. One rule — go all in. A gap year curriculum by Aditi Sahay." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Syne:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Gap Year Grimoire — Aditi Sahay</title>
+<meta name="description" content="Nine months. Nine disciplines. One record. A gap year grimoire by Aditi Sahay."/>
+<meta property="og:title" content="The Gap Year Grimoire — Aditi Sahay"/>
+<meta property="og:description" content="Nine months. Nine disciplines. One record."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   THE GAP YEAR GRIMOIRE — Aditi Sahay · 2025
+   Single file. No glitches. All slay.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #080C1A;
+  --navy2:      #0C1020;
+  --navy3:      #111528;
+  --navy4:      #161C32;
+  --navy5:      #1C2240;
+  --gold:       #C9A84C;
+  --gold2:      #E2C06A;
+  --gold3:      #F0D898;
+  --gold-dim:   #7A6430;
+  --gold-dark:  #4A3C1C;
+  --cream:      #F5EDD8;
+  --cream2:     #EDE0C4;
+  --cream3:     #D4C5A0;
+  --cream4:     #B8A880;
+  --burg:       #6B1E2E;
+  --burg2:      #8B2A3E;
+  --rule:       rgba(201,168,76,.12);
+  --rule2:      rgba(201,168,76,.25);
+  --rule3:      rgba(201,168,76,.45);
+  --tlight:     #F5EDD8;
+  --tmuted:     rgba(245,237,216,.55);
+  --tdim:       rgba(245,237,216,.28);
+  --ff-title:   'Cinzel Decorative', serif;
+  --ff-head:    'Cinzel', serif;
+  --ff-body:    'EB Garamond', serif;
+  --ff-italic:  'Crimson Text', serif;
+  --ease:       cubic-bezier(.4,0,.2,1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--ff-body);
+  background: var(--navy);
+  color: var(--tlight);
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── STARS ── */
+#stars {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute; border-radius: 50%;
+  background: var(--gold3);
+  animation: twinkle var(--d, 3s) ease-in-out infinite var(--delay, 0s);
+}
+@keyframes twinkle {
+  0%,100% { opacity: .08; transform: scale(1); }
+  50%      { opacity: .6;  transform: scale(1.4); }
+}
+
+/* ── SCROLL PROGRESS ── */
+#prog {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--burg2), var(--gold), var(--gold2));
+  z-index: 9998; transition: width .08s linear;
+}
+
+/* ── CURSOR ── */
+#csr {
+  position: fixed; pointer-events: none; z-index: 9999;
+  transform: translate(-6px, -2px);
+  transition: opacity .2s;
+}
+#csr svg { width: 38px; height: 38px; transition: transform .25s var(--ease); }
+body.cur-hover #csr svg { transform: scale(1.2) rotate(-12deg); }
+body.cur-click #csr svg { transform: scale(.9) rotate(8deg); }
+
+/* ── TOAST ── */
+#toast {
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--navy3);
+  border: 1px solid var(--rule2);
+  color: var(--cream2);
+  font-family: var(--ff-head); font-size: .52rem; letter-spacing: .18em; text-transform: uppercase;
+  padding: .55rem 1.4rem; border-radius: 2px;
+  opacity: 0; pointer-events: none; z-index: 9000;
+  transition: opacity .3s, transform .3s; white-space: nowrap;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3rem;
+  background: rgba(8,12,26,.93);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-brand { text-decoration: none; }
+.nav-brand-name {
+  font-family: var(--ff-title); font-size: .8rem;
+  color: var(--gold2); letter-spacing: .06em; display: block;
+}
+.nav-brand-sub {
+  font-family: var(--ff-head); font-size: .48rem;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold-dim); display: block; margin-top: 2px;
+}
+nav ul { list-style: none; display: flex; gap: 2rem; }
+nav ul a {
+  font-family: var(--ff-head); font-size: .55rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--tdim); text-decoration: none;
+  transition: color .25s; position: relative;
+  padding-bottom: 3px;
+}
+nav ul a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width .3s;
+}
+nav ul a:hover { color: var(--gold2); }
+nav ul a:hover::after { width: 100%; }
+
+/* ── HERO ── */
+.hero {
+  position: relative; z-index: 1;
+  padding: 7rem 3rem 6rem;
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 30%, rgba(201,168,76,.07) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(107,30,46,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(107,30,46,.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-ornament-top {
+  font-family: var(--ff-head); font-size: .52rem;
+  letter-spacing: .35em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: 2rem;
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+}
+.hero-ornament-top::before,
+.hero-ornament-top::after {
+  content: ''; width: 60px; height: 1px; background: var(--rule2);
+}
+.hero-title {
+  font-family: var(--ff-title);
+  font-size: clamp(1.8rem, 5vw, 3.6rem);
+  color: var(--gold2);
+  line-height: 1.25; letter-spacing: .05em;
+  margin-bottom: .5rem;
+  text-shadow: 0 0 60px rgba(201,168,76,.18);
+}
+.hero-sub {
+  font-family: var(--ff-head); font-size: clamp(.6rem, 1.2vw, .85rem);
+  letter-spacing: .35em; text-transform: uppercase;
+  color: var(--cream4); margin-bottom: 3rem; opacity: .7;
+}
+.hero-divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem; margin-bottom: 2.5rem; color: var(--gold-dim);
+  font-size: .9rem; letter-spacing: .5em; opacity: .5;
+}
+.hero-divider::before, .hero-divider::after {
+  content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--rule2);
+}
+.hero-quote {
+  font-family: var(--ff-italic); font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--cream2); max-width: 560px;
+  margin: 0 auto 2.5rem; line-height: 1.85; opacity: .88;
+}
+.hero-byline {
+  font-family: var(--ff-head); font-size: .52rem;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: 3rem;
+}
+.hero-tags {
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: .45rem;
+  max-width: 620px; margin: 0 auto;
+}
+.hero-tag {
+  font-family: var(--ff-head); font-size: .46rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: .28rem .75rem;
+  border: 1px solid var(--rule2); color: var(--gold-dim);
+  border-radius: 1px;
+  transition: border-color .3s, color .3s, background .3s, transform .25s;
+}
+.hero-tag:hover {
+  border-color: var(--gold); color: var(--gold2);
+  background: rgba(201,168,76,.08);
+  transform: translateY(-2px);
+}
+
+/* ── SECTION SHELL ── */
+.section {
+  position: relative; z-index: 1;
+  padding: 5.5rem 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+.section-head { text-align: center; margin-bottom: 4rem; }
+.section-eye {
+  font-family: var(--ff-head); font-size: .52rem;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: .8rem;
+}
+.section-title {
+  font-family: var(--ff-head);
+  font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+  color: var(--gold2); letter-spacing: .08em; margin-bottom: 1rem;
+}
+.section-hint {
+  font-family: var(--ff-italic); font-style: italic;
+  font-size: .9rem; color: var(--tdim); margin-top: .6rem;
+}
+.orn { color: var(--gold-dim); letter-spacing: .4em; opacity: .45; font-size: .85rem; }
+
+/* ── TAROT CARDS GRID ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  max-width: 860px; margin: 0 auto;
+}
+
+/* card wrapper */
+.tcard {
+  perspective: 1400px;
+  cursor: none;
+  transition: transform .3s var(--ease);
+}
+.tcard:hover { transform: translateY(-8px); }
+.tcard.flipped:hover { transform: translateY(-5px); }
+
+.tcard-inner {
+  position: relative;
+  width: 100%; padding-bottom: 178%;
+  transform-style: preserve-3d;
+  transition: transform .9s cubic-bezier(.4,0,.2,1);
+}
+.tcard.flipped .tcard-inner { transform: rotateY(180deg); }
+
+.tcard-face, .tcard-back {
+  position: absolute; inset: 0;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* FACE DOWN */
+.tcard-face {
+  background: var(--navy3);
+  border: 1px solid var(--gold-dark);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 1rem;
+  position: relative;
+}
+.tcard-face::before {
+  content: ''; position: absolute; inset: 7px;
+  border: 1px solid rgba(201,168,76,.15); border-radius: 5px;
+}
+.tcard-face::after {
+  content: ''; position: absolute; inset: 12px;
+  border: 1px solid rgba(201,168,76,.06); border-radius: 3px;
+}
+.tcard-face-inner {
+  display: flex; flex-direction: column;
+  align-items: center; gap: .7rem;
+  position: relative; z-index: 1;
+}
+.tcard-face-glyph { font-size: 2rem; opacity: .18; color: var(--gold); line-height: 1; }
+.tcard-face-eye { font-size: 1.4rem; opacity: .22; color: var(--gold2); }
+.tcard-face-num {
+  font-family: var(--ff-head); font-size: .5rem;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold-dim); opacity: .55;
+}
+.tcard-face-dots { font-size: .6rem; letter-spacing: .4em; color: var(--gold-dim); opacity: .2; }
+
+/* FACE UP */
+.tcard-back {
+  background: var(--cream);
+  border: 1px solid var(--cream3);
+  transform: rotateY(180deg);
+  display: flex; flex-direction: column;
+  color: var(--navy);
+}
+.tback-header {
+  background: var(--navy4);
+  padding: .65rem .9rem .55rem;
+  text-align: center;
+  border-bottom: 2px solid var(--gold);
+  flex-shrink: 0;
+}
+.tback-arcana {
+  font-family: var(--ff-head); font-size: .4rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold-dim); display: block; margin-bottom: .2rem;
+}
+.tback-numeral {
+  font-family: var(--ff-head); font-size: .82rem;
+  color: var(--gold2); letter-spacing: .06em; line-height: 1.2;
+}
+.tback-art {
+  background: var(--cream2);
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; min-height: 70px;
+}
+.tback-art-bg1 { position: absolute; font-size: 3.5rem; opacity: .12; color: var(--navy); }
+.tback-art-bg2 { position: absolute; top: 8%; right: 8%; font-size: 1.1rem; opacity: .1; color: var(--navy); }
+.tback-art-bg3 { position: absolute; bottom: 8%; left: 8%; font-size: .9rem; opacity: .08; color: var(--navy); }
+.tback-art-icon { position: relative; z-index: 1; font-size: 2.6rem; }
+.tback-body {
+  padding: .7rem .9rem .6rem;
+  background: var(--cream); flex-shrink: 0;
+}
+.tback-month {
+  font-family: var(--ff-head); font-size: .4rem;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gold-dark); margin-bottom: .22rem;
+}
+.tback-topic {
+  font-family: var(--ff-head); font-size: .7rem;
+  color: var(--navy); letter-spacing: .03em;
+  line-height: 1.3; margin-bottom: .35rem;
+}
+.tback-desc {
+  font-family: var(--ff-italic); font-style: italic;
+  font-size: .72rem; color: #3A3020; line-height: 1.5;
+}
+.tback-footer {
+  background: var(--navy4);
+  padding: .42rem .9rem .5rem;
+  border-top: 1px solid var(--gold-dark);
+  text-align: center; flex-shrink: 0;
+}
+.tback-cta {
+  font-family: var(--ff-head); font-size: .38rem;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+/* ── MODAL ── */
+#modal {
+  position: fixed; inset: 0; z-index: 800;
+  background: rgba(5,8,18,.9);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .4s;
+  padding: 1.5rem;
+}
+#modal.open { opacity: 1; pointer-events: all; }
+
+#modal-box {
+  background: var(--navy2);
+  border: 1px solid var(--gold-dim);
+  border-radius: 8px;
+  max-width: 660px; width: 100%;
+  max-height: 88vh; overflow-y: auto;
+  transform: translateY(18px) scale(.97);
+  transition: transform .45s var(--ease);
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-dark) transparent;
+}
+#modal.open #modal-box { transform: translateY(0) scale(1); }
+
+#modal-box::before {
+  content: ''; position: absolute; inset: 10px;
+  border: 1px solid var(--rule); border-radius: 5px;
+  pointer-events: none; z-index: 0;
+}
+
+.modal-close {
+  position: absolute; top: .9rem; right: 1.1rem;
+  background: none; border: none; cursor: none;
+  font-family: var(--ff-head); font-size: .48rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--gold-dim); padding: .3rem .5rem;
+  transition: color .2s; z-index: 10;
+}
+.modal-close:hover { color: var(--gold2); }
+
+.modal-header {
+  padding: 2.2rem 2.2rem 1.4rem;
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+  position: relative; z-index: 1;
+}
+.modal-arcana-label {
+  font-family: var(--ff-head); font-size: .48rem;
+  letter-spacing: .25em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: .6rem;
+}
+.modal-icon { font-size: 2.2rem; margin-bottom: .6rem; display: block; }
+.modal-title {
+  font-family: var(--ff-head); font-size: 1.3rem;
+  color: var(--gold2); letter-spacing: .06em; margin-bottom: .3rem;
+}
+.modal-month {
+  font-family: var(--ff-italic); font-style: italic;
+  font-size: .95rem; color: var(--tmuted);
+}
+
+.modal-body {
+  padding: 1.8rem 2.2rem 2.2rem;
+  position: relative; z-index: 1;
+}
+.modal-label {
+  font-family: var(--ff-head); font-size: .46rem;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: .65rem; margin-top: 1.6rem;
+  display: flex; align-items: center; gap: .8rem;
+}
+.modal-label:first-child { margin-top: 0; }
+.modal-label::after {
+  content: ''; flex: 1; height: 1px; background: var(--rule);
+}
+.modal-text {
+  font-family: var(--ff-body); font-size: 1rem;
+  color: var(--cream2); line-height: 1.95;
+}
+.modal-text em { color: var(--gold3); font-style: italic; }
+.modal-text strong { color: var(--cream); font-weight: 500; }
+
+.modal-output-box {
+  background: rgba(201,168,76,.04);
+  border: 1px solid var(--rule2);
+  border-radius: 4px;
+  padding: 1.1rem 1.3rem; margin-top: .8rem;
+}
+.modal-output-label {
+  font-family: var(--ff-head); font-size: .44rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .5rem;
+}
+.modal-output-text {
+  font-family: var(--ff-italic); font-style: italic;
+  font-size: .95rem; color: var(--tmuted);
+}
+
+/* ── GAP YEAR WORKS ── */
+.works-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem; max-width: 900px; margin: 0 auto;
+}
+.work-card {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.7rem 1.8rem;
+  position: relative; overflow: hidden;
+  transition: border-color .3s, background .3s;
+  cursor: none;
+}
+.work-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--burg2), var(--gold));
+  transition: width .5s var(--ease);
+}
+.work-card:hover { border-color: var(--rule2); background: rgba(201,168,76,.03); }
+.work-card:hover::before { width: 100%; }
+.work-type {
+  font-family: var(--ff-head); font-size: .46rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: .6rem;
+}
+.work-name {
+  font-family: var(--ff-head); font-size: .95rem;
+  color: var(--gold2); margin-bottom: .75rem; letter-spacing: .04em;
+}
+.work-desc {
+  font-family: var(--ff-body); font-size: .92rem;
+  color: var(--tmuted); line-height: 1.8;
+}
+.work-desc em { color: var(--cream3); font-style: italic; }
+.work-badge {
+  display: inline-block; margin-top: .9rem;
+  font-family: var(--ff-head); font-size: .4rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  padding: .24rem .65rem;
+  border: 1px solid var(--rule2); color: var(--gold-dim); border-radius: 1px;
+}
+
+/* ── GAP YEAR PROSE ── */
+.gap-grid {
+  display: grid; grid-template-columns: .85fr 1.15fr;
+  gap: 5rem; align-items: start;
+  max-width: 900px; margin: 0 auto;
+}
+.gap-big {
+  font-family: var(--ff-head);
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  color: var(--gold2); line-height: 1.35;
+  letter-spacing: .04em; margin-bottom: 1.2rem;
+}
+.gap-big em {
+  font-family: var(--ff-italic); font-style: italic; color: var(--cream3);
+}
+.gap-sub {
+  font-family: var(--ff-italic); font-style: italic;
+  font-size: 1rem; color: var(--tdim);
+}
+.gap-entry {
+  padding: 1.4rem 0; border-bottom: 1px solid var(--rule);
+  transition: padding-left .3s;
+}
+.gap-entry:hover { padding-left: .5rem; }
+.gap-entry:last-child { border-bottom: none; }
+.gap-label {
+  font-family: var(--ff-head); font-size: .46rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: .65rem;
+}
+.gap-text {
+  font-family: var(--ff-body); font-size: .97rem;
+  color: var(--tmuted); line-height: 1.95;
+}
+.gap-text em { color: var(--cream3); font-style: italic; }
+
+/* ── ESSAYS ── */
+.essays-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--rule); border-radius: 4px;
+  overflow: hidden; max-width: 900px; margin: 0 auto;
+}
+.essay-card {
+  padding: 1.9rem 1.6rem;
+  border-right: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+  transition: background .25s; cursor: none;
+  position: relative; overflow: hidden;
+  text-decoration: none; color: inherit;
+}
+.essay-card:last-child { border-right: none; }
+.essay-card:hover { background: rgba(201,168,76,.04); }
+.essay-card::after {
+  content: '↗'; position: absolute; top: 1.3rem; right: 1.3rem;
+  font-size: .85rem; color: var(--rule2);
+  transition: color .3s, transform .3s; font-family: sans-serif;
+}
+.essay-card:hover::after { color: var(--gold); transform: translate(2px,-2px); }
+.essay-num {
+  font-family: var(--ff-head); font-size: 1.4rem;
+  color: var(--rule2); line-height: 1; margin-bottom: .9rem;
+}
+.essay-date {
+  font-family: var(--ff-head); font-size: .42rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--tdim); margin-bottom: .65rem;
+}
+.essay-title {
+  font-family: var(--ff-head); font-size: .75rem;
+  color: var(--cream2); line-height: 1.5;
+  margin-bottom: .65rem; flex: 1; letter-spacing: .02em;
+  transition: color .2s;
+}
+.essay-card:hover .essay-title { color: var(--gold2); }
+.essay-excerpt {
+  font-family: var(--ff-italic); font-style: italic;
+  font-size: .8rem; color: var(--tdim); line-height: 1.65; margin-bottom: 1rem;
+}
+.essay-read {
+  font-family: var(--ff-head); font-size: .42rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--gold-dim); margin-top: auto;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 1;
+  padding: 4rem 3rem;
+  text-align: center;
+  border-top: 1px solid var(--rule);
+}
+.footer-sigil { font-size: 1.5rem; opacity: .15; color: var(--gold); margin-bottom: 1rem; letter-spacing: .5em; }
+.footer-name {
+  font-family: var(--ff-title); font-size: 1.1rem;
+  color: var(--gold-dim); margin-bottom: .5rem; letter-spacing: .06em;
+}
+.footer-tagline {
+  font-family: var(--ff-italic); font-style: italic;
+  font-size: .95rem; color: var(--tdim); margin-bottom: 2rem;
+}
+.footer-links { display: flex; justify-content: center; gap: 2.5rem; }
+.footer-links a {
+  font-family: var(--ff-head); font-size: .5rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--tdim); text-decoration: none; transition: color .2s;
+}
+.footer-links a:hover { color: var(--gold2); }
+
+/* ── REVEAL ── */
+.r { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.r.on { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; }
+.d2 { transition-delay: .2s; }
+.d3 { transition-delay: .3s; }
+.d4 { transition-delay: .4s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  nav { padding: 1rem 1.5rem; }
+  nav ul { gap: 1.2rem; }
+  .hero, .section { padding: 4rem 1.5rem; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .gap-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .works-grid { grid-template-columns: 1fr; }
+  .essays-row { grid-template-columns: 1fr; }
+  .essay-card { border-right: none; border-bottom: 1px solid var(--rule); }
+  .essay-card:last-child { border-bottom: none; }
+  footer { padding: 3rem 1.5rem; }
+}
+@media (max-width: 520px) {
+  body { cursor: auto; }
+  #csr { display: none; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+  .hero-title { font-size: 1.7rem; }
+  nav ul { gap: .8rem; }
+  nav ul a { font-size: .48rem; }
+}
+</style>
 </head>
 <body>
 
-  <!-- ====== NAV ====== -->
-  <nav id="navbar">
-    <div class="logo">
-      <div class="logo-mark">
-        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="14" cy="14" r="13" stroke="#7BAF8E" stroke-width="1"/>
-          <circle cx="10" cy="13" r="2.5" fill="#7BAF8E"/>
-          <circle cx="18" cy="13" r="2.5" fill="#7BAF8E"/>
-          <path d="M12.5 13 Q14 15.5 15.5 13" stroke="#C4813A" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="logo-text">Brain <span>Diet</span></div>
+<!-- STARS -->
+<div id="stars"></div>
+
+<!-- CURSOR -->
+<div id="csr">
+  <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(6,3)">
+      <!-- index finger -->
+      <path d="M12 30 L12 9 C12 7.7 13 6.8 14.2 6.8 C15.4 6.8 16.4 7.7 16.4 9 L16.4 20" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" fill="rgba(201,168,76,.08)"/>
+      <!-- middle finger -->
+      <path d="M16.4 18 C16.4 16.7 17.4 15.8 18.6 15.8 C19.8 15.8 20.8 16.7 20.8 18 L20.8 21" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <!-- ring finger -->
+      <path d="M20.8 19 C20.8 17.7 21.8 16.8 23 16.8 C24.2 16.8 25.2 17.7 25.2 19 L25.2 22.5" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <!-- pinky -->
+      <path d="M25.2 20.5 C25.2 19.2 26.2 18.3 27.4 18.3 C28.6 18.3 29.6 19.2 29.6 20.5 L29.6 26 C29.6 29.8 26.5 33 22.5 33 L17.5 33 C14 33 12 30.8 12 28.5" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(201,168,76,.05)"/>
+    </g>
+  </svg>
+</div>
+
+<div id="prog"></div>
+<div id="toast"></div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#" class="nav-brand">
+    <span class="nav-brand-name">The Gap Year Grimoire</span>
+    <span class="nav-brand-sub">Aditi Sahay · 2025</span>
+  </a>
+  <ul>
+    <li><a href="#arcana">The Arcana</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#year">The Year</a></li>
+    <li><a href="#essays">Essays</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="hero-ornament-top r">Ranchi, India · April — December 2025</div>
+  <h1 class="hero-title r d1">The Gap Year Grimoire</h1>
+  <div class="hero-sub r d1">Nine Months · Nine Disciplines · One Record</div>
+  <div class="hero-divider r d2">✦ ✦ ✦</div>
+  <blockquote class="hero-quote r d2">
+    "The fear wasn't falling behind everyone else.<br>
+    It was the idea of a mind left deliberately idle."
+  </blockquote>
+  <div class="hero-byline r d3">— Aditi Sahay</div>
+  <div class="hero-tags r d3">
+    <span class="hero-tag">Finance</span>
+    <span class="hero-tag">Sciences</span>
+    <span class="hero-tag">Psychology</span>
+    <span class="hero-tag">Philosophy</span>
+    <span class="hero-tag">Law</span>
+    <span class="hero-tag">Geopolitics</span>
+    <span class="hero-tag">Mathematics</span>
+    <span class="hero-tag">Neuroscience</span>
+    <span class="hero-tag">UI/UX</span>
+    <span class="hero-tag">Data Science</span>
+    <span class="hero-tag">Political Science</span>
+    <span class="hero-tag">Debate</span>
+  </div>
+</section>
+
+<!-- ══ ARCANA / CARDS ══ -->
+<section class="section" id="arcana">
+  <div class="section-head">
+    <div class="section-eye r">The Major Arcana</div>
+    <h2 class="section-title r d1">Nine Cards · Nine Months</h2>
+    <p class="orn r d1">✧ ✧ ✧</p>
+    <p class="section-hint r d2">Click a card to reveal the month · Click again to read the full entry</p>
+  </div>
+  <div class="cards-grid" id="cards-grid"></div>
+</section>
+
+<!-- ══ GAP YEAR WORKS ══ -->
+<section class="section" id="works">
+  <div class="section-head">
+    <div class="section-eye r">The Codex</div>
+    <h2 class="section-title r d1">Gap Year Works</h2>
+    <p class="orn r d1">✧ ✧ ✧</p>
+    <p class="section-hint r d2">Everything built, written, launched, or delivered this year.</p>
+  </div>
+  <div class="works-grid" id="works-grid"></div>
+</section>
+
+<!-- ══ GAP YEAR PROSE ══ -->
+<section class="section" id="year">
+  <div class="section-head">
+    <div class="section-eye r">The Chronicle</div>
+    <h2 class="section-title r d1">On Taking a Gap Year</h2>
+    <p class="orn r d1">✧ ✧ ✧</p>
+  </div>
+  <div class="gap-grid">
+    <div>
+      <h3 class="gap-big r">A year with<br>no one to<br><em>answer to</em><br>but myself.</h3>
+      <p class="gap-sub r d1">And that turned out to be the hardest part.</p>
     </div>
-    <ul id="navMenu">
-      <li><a href="#curriculum">Curriculum</a></li>
-      <li><a href="#gap-year">Gap year</a></li>
-      <li><a href="#essays">Essays</a></li>
-      <li><a href="mailto:freelance.aditisahay@gmail.com">Contact</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-      <span></span><span></span>
-    </button>
-  </nav>
-
-  <!-- ====== HERO ====== -->
-  <section class="hero" id="home">
-    <div class="hero-top">
-
-      <div class="hero-left">
-        <div class="eyebrow reveal">April – December 2025</div>
-        <h1 class="hero-title reveal">
-          I gave myself<br>
-          a <em>curriculum</em><br>
-          for a year.
-        </h1>
-        <p class="hero-intro reveal reveal-delay">
-          No school, no syllabus, no one checking in. Just me deciding that a gap year could mean something — that nine months of genuine curiosity, documented honestly, was worth more than nine months of waiting to start.
-        </p>
-        <p class="hero-intro reveal reveal-delay">
-          This is that record. One topic per month, one project at the end. Everything made by hand, in public.
-        </p>
-        <div class="hero-byline reveal reveal-delay-2">— Aditi Sahay · <span>Ranchi, India</span></div>
+    <div>
+      <div class="gap-entry r">
+        <div class="gap-label">Why a gap year</div>
+        <p class="gap-text">I didn't take a gap year because I was lost. I took it because I wanted to actually choose what comes next — not just accept the first door that opened. That meant buying myself time to grow, to try things, to be uncomfortable entirely on my own terms.</p>
       </div>
-
-      <div class="hero-right">
-        <blockquote class="hero-quote reveal">
-          "The fear wasn't falling behind everyone else. It was the idea of a brain left deliberately idle."
-        </blockquote>
-        <div class="hero-tags reveal reveal-delay">
-          <span class="tag">Finance</span>
-          <span class="tag">Sciences</span>
-          <span class="tag">Psychology</span>
-          <span class="tag">Philosophy</span>
-          <span class="tag">Law</span>
-          <span class="tag">Geopolitics</span>
-          <span class="tag">Mathematics</span>
-          <span class="tag">Neuroscience</span>
-          <span class="tag">UI/UX</span>
-          <span class="tag">Data Science</span>
-          <span class="tag">Political Science</span>
-          <span class="tag">Debate</span>
-        </div>
+      <div class="gap-entry r d1">
+        <div class="gap-label">What nobody tells you</div>
+        <p class="gap-text">When there's no structure, <em>you become the structure.</em> No teacher, no deadline, no peer pressure to show up. I had to be strict with myself in a way school never required. Showing up for yourself, consistently, when no one is watching — that's the real education.</p>
       </div>
-
-    </div>
-  </section>
-
-  <!-- ====== CALENDAR + CURRICULUM ====== -->
-  <section class="calendar-section" id="curriculum">
-    <div class="section-label">The nine months</div>
-
-    <!-- horizontal strip -->
-    <div class="cal-grid">
-      <div class="cal-cell current" title="Click to see topic">
-        <div class="cal-top">
-          <div class="cal-month">Apr</div>
-          <div class="cal-num">01</div>
-        </div>
-        <div class="cal-topic">Finance</div>
-        <div class="cal-dot"></div>
+      <div class="gap-entry r d2">
+        <div class="gap-label">What I actually did</div>
+        <p class="gap-text">Freelancing — design, content, websites. Writing essays every Sunday on Substack, <em>whether or not anyone reads them.</em> Building a social following from scratch — 324 followers, no team, no budget, just consistency. And the Brain Diet: nine months of deliberate self-directed learning, one field at a time.</p>
       </div>
-      <div class="cal-cell">
-        <div class="cal-top"><div class="cal-month">May</div><div class="cal-num">02</div></div>
-        <div class="cal-topic">Physics, Chem, Bio & Maths</div>
-        <div class="cal-dot"></div>
-      </div>
-      <div class="cal-cell">
-        <div class="cal-top"><div class="cal-month">Jun</div><div class="cal-num">03</div></div>
-        <div class="cal-topic">Psych & Philosophy</div>
-        <div class="cal-dot"></div>
-      </div>
-      <div class="cal-cell">
-        <div class="cal-top"><div class="cal-month">Jul</div><div class="cal-num">04</div></div>
-        <div class="cal-topic">Law & Geopolitics</div>
-        <div class="cal-dot"></div>
-      </div>
-      <div class="cal-cell">
-        <div class="cal-top"><div class="cal-month">Aug</div><div class="cal-num">05</div></div>
-        <div class="cal-topic">Mathematics</div>
-        <div class="cal-dot"></div>
-      </div>
-      <div class="cal-cell">
-        <div class="cal-top"><div class="cal-month">Sep</div><div class="cal-num">06</div></div>
-        <div class="cal-topic">Cognitive Sci & Neuro</div>
-        <div class="cal-dot"></div>
-      </div>
-      <div class="cal-cell">
-        <div class="cal-top"><div class="cal-month">Oct</div><div class="cal-num">07</div></div>
-        <div class="cal-topic">UI/UX Design</div>
-        <div class="cal-dot"></div>
-      </div>
-      <div class="cal-cell">
-        <div class="cal-top"><div class="cal-month">Nov</div><div class="cal-num">08</div></div>
-        <div class="cal-topic">Data Science & Stats</div>
-        <div class="cal-dot"></div>
-      </div>
-      <div class="cal-cell">
-        <div class="cal-top"><div class="cal-month">Dec</div><div class="cal-num">09</div></div>
-        <div class="cal-topic">Political Sci & Debate</div>
-        <div class="cal-dot"></div>
+      <div class="gap-entry r d3">
+        <div class="gap-label">What I grew into</div>
+        <p class="gap-text">Someone who doesn't wait to be assigned a task. Someone who's failed publicly enough to not be afraid of it. Someone who knows that growth, when it's real, is slow and quiet and <em>rarely looks impressive while it's happening.</em></p>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- curriculum detail cards -->
-    <div class="curr-cards">
+<!-- ══ ESSAYS ══ -->
+<section class="section" id="essays">
+  <div class="section-head">
+    <div class="section-eye r">The Scrolls</div>
+    <h2 class="section-title r d1">Essays on Sundays</h2>
+    <p class="orn r d1">✧ ✧ ✧</p>
+    <p class="section-hint r d2">
+      <a href="https://substack.com/@aditiisahay" target="_blank"
+         style="font-family:var(--ff-head);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);text-decoration:none;">
+        Read all on Substack →
+      </a>
+    </p>
+  </div>
+  <div class="essays-row">
+    <a class="essay-card r" href="https://substack.com/@aditiisahay" target="_blank">
+      <div class="essay-num">III</div>
+      <div class="essay-date">26 Apr 2025</div>
+      <h3 class="essay-title">The more you know, the less certain you become</h3>
+      <p class="essay-excerpt">Greater knowledge exposes complexity and limitations, increasing uncertainty rather than eliminating it.</p>
+      <span class="essay-read">2 min read →</span>
+    </a>
+    <a class="essay-card r d1" href="https://substack.com/@aditiisahay" target="_blank">
+      <div class="essay-num">II</div>
+      <div class="essay-date">19 Apr 2025</div>
+      <h3 class="essay-title">When does acceptance become intellectual laziness?</h3>
+      <p class="essay-excerpt">Maybe it is easier not to think than to question. The line between peace and complacency is thin.</p>
+      <span class="essay-read">2 min read →</span>
+    </a>
+    <a class="essay-card r d2" href="https://substack.com/@aditiisahay" target="_blank">
+      <div class="essay-num">I</div>
+      <div class="essay-date">12 Apr 2025</div>
+      <h3 class="essay-title">Is being authentic even authentic anymore?</h3>
+      <p class="essay-excerpt">Everyone is "being real". Everyone is "being themselves". So why does it all start to feel the same?</p>
+      <span class="essay-read">3 min read →</span>
+    </a>
+  </div>
+</section>
 
-      <article class="curr-card active reveal">
-        <div class="curr-card-header">
-          <div class="curr-meta">
-            <span class="curr-num-label">01</span>
-            <span class="curr-month-label">April 2025</span>
-          </div>
-          <span class="curr-status status-active">In progress</span>
-        </div>
-        <h3 class="curr-topic-title">Finance</h3>
-        <p class="curr-desc">Markets, money, and how the world actually moves. Reading on personal finance, macroeconomics, and how capital flows through systems.</p>
-        <div class="curr-footer">
-          <span class="curr-output-label">End of month output →</span>
-          <span class="curr-output">Project / writeup coming soon</span>
-        </div>
-      </article>
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-sigil">☽ ✦ ☾</div>
+  <div class="footer-name">The Gap Year Grimoire</div>
+  <div class="footer-tagline">"thinking out loud so you don't have to."</div>
+  <div class="footer-links">
+    <a href="https://substack.com/@aditiisahay" target="_blank">Substack</a>
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+    <a href="https://aditisahay.vercel.app" target="_blank">Portfolio</a>
+    <a href="mailto:freelance.aditisahay@gmail.com">Contact</a>
+  </div>
+</footer>
 
-      <article class="curr-card reveal">
-        <div class="curr-card-header">
-          <div class="curr-meta">
-            <span class="curr-num-label">02</span>
-            <span class="curr-month-label">May 2025</span>
-          </div>
-          <span class="curr-status status-upcoming">Upcoming</span>
-        </div>
-        <h3 class="curr-topic-title">Physics, Chemistry, Biology & Maths</h3>
-        <p class="curr-desc">Going back to the fundamentals — but this time because I want to, not because I have to.</p>
-        <div class="curr-footer">
-          <span class="curr-output-label">End of month output →</span>
-          <span class="curr-output">TBD</span>
-        </div>
-      </article>
-
-      <article class="curr-card reveal">
-        <div class="curr-card-header">
-          <div class="curr-meta">
-            <span class="curr-num-label">03</span>
-            <span class="curr-month-label">June 2025</span>
-          </div>
-          <span class="curr-status status-upcoming">Upcoming</span>
-        </div>
-        <h3 class="curr-topic-title">Psychology & Philosophy</h3>
-        <p class="curr-desc">Why people do what they do, and whether any of it makes sense. The inner life, examined.</p>
-        <div class="curr-footer">
-          <span class="curr-output-label">End of month output →</span>
-          <span class="curr-output">TBD</span>
-        </div>
-      </article>
-
-      <article class="curr-card reveal">
-        <div class="curr-card-header">
-          <div class="curr-meta">
-            <span class="curr-num-label">04</span>
-            <span class="curr-month-label">July 2025</span>
-          </div>
-          <span class="curr-status status-upcoming">Upcoming</span>
-        </div>
-        <h3 class="curr-topic-title">Law & Geopolitics</h3>
-        <p class="curr-desc">How rules are made, who they serve, and why the map of power keeps shifting.</p>
-        <div class="curr-footer">
-          <span class="curr-output-label">End of month output →</span>
-          <span class="curr-output">TBD</span>
-        </div>
-      </article>
-
-      <article class="curr-card reveal">
-        <div class="curr-card-header">
-          <div class="curr-meta">
-            <span class="curr-num-label">05</span>
-            <span class="curr-month-label">August 2025</span>
-          </div>
-          <span class="curr-status status-upcoming">Upcoming</span>
-        </div>
-        <h3 class="curr-topic-title">Mathematics</h3>
-        <p class="curr-desc">Pure thinking, gone deeper. The beauty of abstraction for its own sake.</p>
-        <div class="curr-footer">
-          <span class="curr-output-label">End of month output →</span>
-          <span class="curr-output">TBD</span>
-        </div>
-      </article>
-
-      <article class="curr-card reveal">
-        <div class="curr-card-header">
-          <div class="curr-meta">
-            <span class="curr-num-label">06</span>
-            <span class="curr-month-label">September 2025</span>
-          </div>
-          <span class="curr-status status-upcoming">Upcoming</span>
-        </div>
-        <h3 class="curr-topic-title">Cognitive Science, Neuroscience & Biology</h3>
-        <p class="curr-desc">What the brain is doing while you think you're thinking. How consciousness, memory, and attention actually work.</p>
-        <div class="curr-footer">
-          <span class="curr-output-label">End of month output →</span>
-          <span class="curr-output">TBD</span>
-        </div>
-      </article>
-
-      <article class="curr-card reveal">
-        <div class="curr-card-header">
-          <div class="curr-meta">
-            <span class="curr-num-label">07</span>
-            <span class="curr-month-label">October 2025</span>
-          </div>
-          <span class="curr-status status-upcoming">Upcoming</span>
-        </div>
-        <h3 class="curr-topic-title">UI/UX Design</h3>
-        <p class="curr-desc">The craft behind things that feel obvious to use. Design as problem-solving, not decoration.</p>
-        <div class="curr-footer">
-          <span class="curr-output-label">End of month output →</span>
-          <span class="curr-output">TBD</span>
-        </div>
-      </article>
-
-      <article class="curr-card reveal">
-        <div class="curr-card-header">
-          <div class="curr-meta">
-            <span class="curr-num-label">08</span>
-            <span class="curr-month-label">November 2025</span>
-          </div>
-          <span class="curr-status status-upcoming">Upcoming</span>
-        </div>
-        <h3 class="curr-topic-title">Data Science & Statistics</h3>
-        <p class="curr-desc">Learning to ask better questions of numbers — and knowing when numbers are lying to you.</p>
-        <div class="curr-footer">
-          <span class="curr-output-label">End of month output →</span>
-          <span class="curr-output">TBD</span>
-        </div>
-      </article>
-
-      <article class="curr-card reveal">
-        <div class="curr-card-header">
-          <div class="curr-meta">
-            <span class="curr-num-label">09</span>
-            <span class="curr-month-label">December 2025</span>
-          </div>
-          <span class="curr-status status-upcoming">Upcoming</span>
-        </div>
-        <h3 class="curr-topic-title">Political Science, Debate & Persuasive Writing</h3>
-        <p class="curr-desc">How ideas win. How arguments are built, tested, and made to stick.</p>
-        <div class="curr-footer">
-          <span class="curr-output-label">End of month output →</span>
-          <span class="curr-output">TBD</span>
-        </div>
-      </article>
-
+<!-- ══ MODAL ══ -->
+<div id="modal" onclick="modalBgClick(event)">
+  <div id="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕ Close</button>
+    <div class="modal-header">
+      <div class="modal-arcana-label" id="m-arcana"></div>
+      <span class="modal-icon" id="m-icon"></span>
+      <div class="modal-title" id="m-title"></div>
+      <div class="modal-month" id="m-month"></div>
     </div>
-  </section>
-
-  <!-- ====== GAP YEAR ====== -->
-  <section class="gap-section" id="gap-year">
-    <div class="section-label">On taking a gap year</div>
-    <div class="gap-grid">
-
-      <div class="gap-left reveal">
-        <h2 class="gap-big">A year with<br>no one to<br><em>answer to</em><br>but myself.</h2>
-        <p class="gap-subtext">And that turned out to be the hardest part.</p>
-      </div>
-
-      <div class="gap-right">
-        <div class="gap-entry reveal">
-          <div class="gap-entry-label">Why a gap year</div>
-          <p class="gap-entry-text">I didn't take a gap year because I was lost. I took it because I wanted to actually choose what comes next — not just accept the first door that opened. That meant buying myself time to grow, to try things, to be uncomfortable entirely on my own terms.</p>
-        </div>
-        <div class="gap-entry reveal">
-          <div class="gap-entry-label">What nobody tells you</div>
-          <p class="gap-entry-text">When there's no structure, <em>you become the structure.</em> No teacher, no deadline, no peer pressure to show up. I had to be strict with myself in a way school never required. Showing up for yourself, consistently, when no one is watching — that's the real education.</p>
-        </div>
-        <div class="gap-entry reveal">
-          <div class="gap-entry-label">What I actually did</div>
-          <p class="gap-entry-text">Freelancing — design, content, websites. Writing essays every Sunday on Substack, <em>whether or not anyone reads them.</em> Building a following on social media from scratch — 324 followers with no team, no budget, just consistency. And the Brain Diet: nine months of deliberate, self-directed learning, one field at a time.</p>
-        </div>
-        <div class="gap-entry reveal">
-          <div class="gap-entry-label">What I grew into</div>
-          <p class="gap-entry-text">Someone who doesn't wait to be assigned a task. Someone who's failed publicly enough to not be afraid of it. Someone who knows that growth, when it's real, is slow and quiet and rarely looks impressive while it's happening.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ====== ESSAYS ====== -->
-  <section class="essays-section" id="essays">
-    <div class="section-label-row">
-      <div class="section-label">Essays on Sundays</div>
-      <a href="https://substack.com/@aditiisahay" target="_blank" class="section-link">Read all on Substack →</a>
-    </div>
-    <div class="essays-grid">
-
-      <article class="essay-card reveal" data-url="https://substack.com/@aditiisahay">
-        <div class="essay-num">03</div>
-        <div class="essay-date">26 Apr 2025</div>
-        <h3 class="essay-title">The more you know, the less certain you become</h3>
-        <p class="essay-excerpt">Greater knowledge exposes complexity and limitations, increasing uncertainty rather than eliminating it. Certainty is often a byproduct of ignorance.</p>
-        <span class="essay-read">2 min read →</span>
-      </article>
-
-      <article class="essay-card reveal reveal-delay" data-url="https://substack.com/@aditiisahay">
-        <div class="essay-num">02</div>
-        <div class="essay-date">19 Apr 2025</div>
-        <h3 class="essay-title">When does acceptance become intellectual laziness?</h3>
-        <p class="essay-excerpt">Maybe it is easier not to think than to question. The line between peace and complacency is thinner than it looks.</p>
-        <span class="essay-read">2 min read →</span>
-      </article>
-
-      <article class="essay-card reveal reveal-delay-2" data-url="https://substack.com/@aditiisahay">
-        <div class="essay-num">01</div>
-        <div class="essay-date">12 Apr 2025</div>
-        <h3 class="essay-title">Is being authentic even authentic anymore?</h3>
-        <p class="essay-excerpt">Everyone is "being real". Everyone is "being themselves". So why does it all start to feel the same?</p>
-        <span class="essay-read">3 min read →</span>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ====== CURRENTLY ====== -->
-  <section class="currently-section">
-    <div class="section-label">Right now</div>
-    <div class="currently-grid">
-      <div class="curr-item reveal">
-        <div class="curr-item-label">Brain Diet · Month 01</div>
-        <div class="curr-item-val">Finance</div>
-        <div class="curr-item-sub">Markets, money, how it all moves</div>
-      </div>
-      <div class="curr-item reveal reveal-delay">
-        <div class="curr-item-label">Freelancing</div>
-        <div class="curr-item-val">Design & web</div>
-        <div class="curr-item-sub">Building independently, Ranchi</div>
-      </div>
-      <div class="curr-item reveal reveal-delay">
-        <div class="curr-item-label">Writing</div>
-        <div class="curr-item-val">Essays every Sunday</div>
-        <div class="curr-item-sub">@aditiisahay on Substack</div>
-      </div>
-      <div class="curr-item reveal reveal-delay-2">
-        <div class="curr-item-label">Content creation</div>
-        <div class="curr-item-val count-animate">324</div>
-        <div class="curr-item-sub">followers · building from zero</div>
+    <div class="modal-body">
+      <div class="modal-label">What I studied</div>
+      <p class="modal-text" id="m-study"></p>
+      <div class="modal-label">Resources & approach</div>
+      <p class="modal-text" id="m-resources"></p>
+      <div class="modal-label">End of month output</div>
+      <div class="modal-output-box">
+        <div class="modal-output-label">Deliverable</div>
+        <div class="modal-output-text" id="m-output"></div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ====== FOOTER ====== -->
-  <footer>
-    <div class="footer-tagline">"thinking out loud so you don't have to."</div>
-    <div class="footer-links">
-      <a href="https://substack.com/@aditiisahay" target="_blank">Substack</a>
-      <a href="https://instagram.com" target="_blank">Instagram</a>
-      <a href="https://aditisahay.vercel.app" target="_blank">Portfolio</a>
-    </div>
-  </footer>
+<script>
+/* ══════════════════════════════════════════
+   DATA
+══════════════════════════════════════════ */
+const ARCANA = [
+  {
+    numeral: 'I',
+    month: 'April 2025',
+    topic: 'Finance',
+    icon: '☿',
+    artBg: '₿', artBg2: '📈', artBg3: '✦',
+    cardIcon: '💰',
+    shortDesc: 'Markets, money, and how the world actually moves.',
+    study: 'Finance felt like a secret language everyone around me already spoke — and I wanted in. I started with personal finance, moved to understanding how markets work, and ended up fascinated by macroeconomics and the invisible hand that shapes everyday decisions.',
+    resources: 'Read <em>The Psychology of Money</em> by Morgan Housel. Went deep into how compounding works, explored stock markets, studied the basics of macroeconomics, and followed global financial news through a structural lens for the first time.',
+    output: 'Essay on how understanding money changed how I see everyday choices. Coming soon — end of April 2025.'
+  },
+  {
+    numeral: 'II',
+    month: 'May 2025',
+    topic: 'Sciences',
+    icon: '⚗',
+    artBg: '⚛', artBg2: '🧬', artBg3: '∞',
+    cardIcon: '🔬',
+    shortDesc: 'Physics, chemistry, biology, mathematics — revisited as lenses, not exams.',
+    study: 'Going back to the fundamentals — but this time entirely because I want to, not because I have to. The goal was to fall back in love with the sciences: to see them as frameworks for understanding reality rather than syllabi to get through.',
+    resources: 'Feynman\'s physics lectures, biology of cells and systems, organic chemistry fundamentals, popular science books on mathematics and the natural world.',
+    output: 'TBD — upcoming month.'
+  },
+  {
+    numeral: 'III',
+    month: 'June 2025',
+    topic: 'Psychology & Philosophy',
+    icon: '☽',
+    artBg: '∞', artBg2: '🪞', artBg3: '◎',
+    cardIcon: '🧠',
+    shortDesc: 'Why people do what they do, and whether any of it makes sense.',
+    study: 'I read about cognitive biases, existentialism, the nature of the self, and what it means to live deliberately. This month was about turning the lens inward — understanding not just the world but the mind doing the understanding.',
+    resources: '<em>Thinking Fast and Slow</em> by Kahneman, Stoic philosophy (Marcus Aurelius, Epictetus), Albert Camus on absurdism, Buddhist psychology, and the philosophy of personal identity.',
+    output: 'TBD — upcoming month.'
+  },
+  {
+    numeral: 'IV',
+    month: 'July 2025',
+    topic: 'Law & Geopolitics',
+    icon: '⚖',
+    artBg: '♜', artBg2: '🗺', artBg3: '⚐',
+    cardIcon: '🌍',
+    shortDesc: 'How rules are made, who they serve, and why the map of power keeps shifting.',
+    study: 'Exploring how legal systems are designed and who they protect. Geopolitics as the study of power — why some countries rise and others don\'t, how alliances form and collapse, and what drives international decisions that look irrational from the outside.',
+    resources: 'Podcasts on geopolitics and international relations, basics of constitutional and international law, Peter Zeihan on geopolitics, current affairs read through a structural lens.',
+    output: 'TBD — upcoming month.'
+  },
+  {
+    numeral: 'V',
+    month: 'August 2025',
+    topic: 'Mathematics',
+    icon: '△',
+    artBg: 'π', artBg2: '∑', artBg3: '∫',
+    cardIcon: '∑',
+    shortDesc: 'Pure thinking, gone deeper. The beauty of abstraction for its own sake.',
+    study: 'Mathematics not as a tool to pass exams but as a way of thinking. Topology, number theory, probability, and the joy of proofs. The goal was to see why mathematicians find this beautiful — and by the end, I did.',
+    resources: '<em>How to Think Like a Mathematician</em>, recreational maths books, Khan Academy advanced topics, mathematical puzzles and problems explored purely for the pleasure of it.',
+    output: 'TBD — upcoming month.'
+  },
+  {
+    numeral: 'VI',
+    month: 'September 2025',
+    topic: 'Cognitive Science & Neuroscience',
+    icon: '◎',
+    artBg: '⚡', artBg2: '🔮', artBg3: '〰',
+    cardIcon: '🔮',
+    shortDesc: 'What the brain is doing while you think you\'re thinking.',
+    study: 'How memory is encoded, how attention is hijacked, what consciousness actually is, and whether free will makes sense given what we know about how neurons fire. The most humbling month — learning how little control we actually have, and finding that freeing.',
+    resources: 'Neuroscience lectures, <em>The Brain That Changes Itself</em> by Norman Doidge, Oliver Sacks, cognitive science papers made accessible, podcasts on consciousness and decision-making.',
+    output: 'TBD — upcoming month.'
+  },
+  {
+    numeral: 'VII',
+    month: 'October 2025',
+    topic: 'UI/UX Design',
+    icon: '◇',
+    artBg: '⬡', artBg2: '▲', artBg3: '◯',
+    cardIcon: '✦',
+    shortDesc: 'The craft behind things that feel obvious to use.',
+    study: 'I already freelance in design — this month was about going deeper into the theory, not just the tools. Why do some interfaces feel effortless? What makes a decision tree invisible to the user? Design as empathy at scale.',
+    resources: 'Don Norman\'s <em>The Design of Everyday Things</em>, UX research methods, typography deep-dives, studying design systems at Google and Apple, Jakob Nielsen\'s heuristics.',
+    output: 'TBD — upcoming month.'
+  },
+  {
+    numeral: 'VIII',
+    month: 'November 2025',
+    topic: 'Data Science & Statistics',
+    icon: '∴',
+    artBg: '∫', artBg2: '📊', artBg3: '∂',
+    cardIcon: '📊',
+    shortDesc: 'Learning to ask better questions of numbers — and knowing when numbers lie.',
+    study: 'Statistics as a way of seeing the world more honestly. How data is collected, how bias enters at every stage, and how to build intuition for what numbers actually mean vs. what they\'re made to appear to mean.',
+    resources: '<em>How to Lie with Statistics</em>, Python basics for data analysis, exploratory data analysis techniques, statistical inference fundamentals.',
+    output: 'TBD — upcoming month.'
+  },
+  {
+    numeral: 'IX',
+    month: 'December 2025',
+    topic: 'Political Science, Debate & Writing',
+    icon: '★',
+    artBg: '⚐', artBg2: '🖊', artBg3: '◈',
+    cardIcon: '🖊',
+    shortDesc: 'How ideas win. How arguments are built and made to stick.',
+    study: 'Ending the year with communication — the thing that ties all other knowledge together. How political systems form and fail, how rhetoric works, and how the best thinkers make their case even when the evidence is imperfect.',
+    resources: 'Debate technique and formal argumentation, rhetoric from Aristotle to modern persuasion, political theory classics, writing essays that move people rather than just inform them.',
+    output: 'TBD — the final chapter.'
+  },
+];
 
-  <script src="main.js"></script>
+const WORKS = [
+  {
+    type: 'Community',
+    name: 'Scientella',
+    desc: 'Founded a 42-member STEM community bringing together curious young people. <em>From a personal frustration into something that outlasted the impulse.</em>',
+    badge: 'Founded'
+  },
+  {
+    type: 'Event Production',
+    name: 'CodeDay Ranchi',
+    desc: 'Produced the first CodeDay hackathon in Ranchi — end to end. Logistics, speakers, participants, the whole thing. <em>The city\'s first of its kind.</em>',
+    badge: 'Produced'
+  },
+  {
+    type: 'Published Writing',
+    name: 'Unsaid — Poetry Collection',
+    desc: 'Published a poetry collection. Not a small thing — writing enough to fill a book, editing it, and deciding it was worth sharing with the world.',
+    badge: 'Published'
+  },
+  {
+    type: 'Ongoing Publication',
+    name: 'Substack: Essays on Sundays',
+    desc: 'Writing publicly every Sunday. 73 subscribers and growing. <em>Thinking out loud so you don\'t have to.</em>',
+    badge: 'Weekly'
+  },
+  {
+    type: 'Freelance Web',
+    name: 'Client Websites',
+    desc: 'Designed and built 3–5 page static websites for clients. Clean, purposeful, and delivered. <em>HTML, CSS, JS — no frameworks, no bloat.</em>',
+    badge: 'Delivered'
+  },
+  {
+    type: 'Freelance Creative',
+    name: 'Design & Content Work',
+    desc: 'Graphic design, video editing, and content writing for clients across India. Building a sustainable solo practice independently from Ranchi.',
+    badge: 'Ongoing'
+  },
+];
+
+/* ══════════════════════════════════════════
+   RENDER CARDS
+══════════════════════════════════════════ */
+const grid = document.getElementById('cards-grid');
+
+ARCANA.forEach((card, i) => {
+  const delays = ['', ' d1', ' d2', '', ' d1', ' d2', '', ' d1', ' d2'];
+  const el = document.createElement('div');
+  el.className = 'tcard r' + delays[i];
+  el.dataset.stage = '0';
+  el.dataset.idx = i;
+
+  el.innerHTML = `
+    <div class="tcard-inner">
+
+      <!-- FACE DOWN -->
+      <div class="tcard-face">
+        <div class="tcard-face-inner">
+          <div class="tcard-face-dots">· · ·</div>
+          <div class="tcard-face-glyph">☽</div>
+          <div class="tcard-face-eye">✦</div>
+          <div class="tcard-face-num">${card.numeral}</div>
+          <div class="tcard-face-dots">· · ·</div>
+        </div>
+      </div>
+
+      <!-- FACE UP -->
+      <div class="tcard-back">
+        <div class="tback-header">
+          <span class="tback-arcana">Arcana ${card.numeral}</span>
+          <div class="tback-numeral">${card.topic}</div>
+        </div>
+        <div class="tback-art">
+          <div class="tback-art-bg1">${card.artBg}</div>
+          <div class="tback-art-bg2">${card.artBg2}</div>
+          <div class="tback-art-bg3">${card.artBg3}</div>
+          <div class="tback-art-icon">${card.cardIcon}</div>
+        </div>
+        <div class="tback-body">
+          <div class="tback-month">${card.month}</div>
+          <div class="tback-topic">${card.topic}</div>
+          <div class="tback-desc">${card.shortDesc}</div>
+        </div>
+        <div class="tback-footer">
+          <div class="tback-cta">Click again to read the full entry ✦</div>
+        </div>
+      </div>
+
+    </div>`;
+
+  el.addEventListener('click', () => {
+    const stage = parseInt(el.dataset.stage);
+    if (stage === 0) {
+      el.classList.add('flipped');
+      el.dataset.stage = '1';
+      toast(card.topic);
+    } else {
+      openModal(i);
+    }
+  });
+
+  grid.appendChild(el);
+});
+
+/* ══════════════════════════════════════════
+   RENDER WORKS
+══════════════════════════════════════════ */
+const wgrid = document.getElementById('works-grid');
+WORKS.forEach((w, i) => {
+  const el = document.createElement('div');
+  el.className = 'work-card r' + (i % 2 === 1 ? ' d1' : '');
+  el.innerHTML = `
+    <div class="work-type">${w.type}</div>
+    <div class="work-name">${w.name}</div>
+    <p class="work-desc">${w.desc}</p>
+    <span class="work-badge">${w.badge}</span>`;
+  wgrid.appendChild(el);
+});
+
+/* ══════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════ */
+function openModal(i) {
+  const c = ARCANA[i];
+  document.getElementById('m-arcana').textContent = `Arcana ${c.numeral} · ${c.month}`;
+  document.getElementById('m-icon').textContent = c.cardIcon;
+  document.getElementById('m-title').textContent = c.topic;
+  document.getElementById('m-month').textContent = c.month;
+  document.getElementById('m-study').innerHTML = c.study;
+  document.getElementById('m-resources').innerHTML = c.resources;
+  document.getElementById('m-output').textContent = c.output;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function modalBgClick(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+/* ══════════════════════════════════════════
+   CURSOR
+══════════════════════════════════════════ */
+const csr = document.getElementById('csr');
+let mx = 0, my = 0, cx = 0, cy = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+});
+(function loop() {
+  cx += (mx - cx) * 0.13;
+  cy += (my - cy) * 0.13;
+  csr.style.left = cx + 'px';
+  csr.style.top  = cy + 'px';
+  requestAnimationFrame(loop);
+})();
+
+const hoverEls = 'a, button, .tcard, .work-card, .essay-card, .hero-tag, .modal-close, nav ul a';
+document.querySelectorAll(hoverEls).forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cur-hover'));
+});
+document.addEventListener('mousedown', () => document.body.classList.add('cur-click'));
+document.addEventListener('mouseup',   () => document.body.classList.remove('cur-click'));
+
+/* ══════════════════════════════════════════
+   SCROLL PROGRESS
+══════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  document.getElementById('prog').style.width = pct + '%';
+}, { passive: true });
+
+/* ══════════════════════════════════════════
+   STARS
+══════════════════════════════════════════ */
+const starContainer = document.getElementById('stars');
+for (let i = 0; i < 90; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 1.8 + 0.8;
+  s.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random() * 100}%;
+    top:${Math.random() * 100}%;
+    --d:${2 + Math.random() * 5}s;
+    --delay:${Math.random() * 5}s
+  `;
+  starContainer.appendChild(s);
+}
+
+/* ══════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════ */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.r').forEach(el => revealObs.observe(el));
+
+/* ══════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════ */
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  clearTimeout(toastTimer);
+  t.textContent = msg;
+  t.classList.add('show');
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* ══════════════════════════════════════════
+   KONAMI EASTER EGG
+══════════════════════════════════════════ */
+let konamiBuffer = [];
+const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+document.addEventListener('keydown', e => {
+  konamiBuffer.push(e.key);
+  konamiBuffer = konamiBuffer.slice(-10);
+  if (konamiBuffer.join(',') === KONAMI.join(',')) {
+    toast('✦ The grimoire sees all ✦');
+    document.querySelectorAll('.star').forEach(s => {
+      s.style.animationDuration = '.5s';
+      setTimeout(() => s.style.animationDuration = '', 2000);
+    });
+  }
+});
+
+/* ══════════════════════════════════════════
+   NAV ACTIVE STATE
+══════════════════════════════════════════ */
+const sections = document.querySelectorAll('section[id], div[id]');
+const navLinks = document.querySelectorAll('nav ul a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 140) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current
+      ? 'var(--gold2)' : '';
+  });
+}, { passive: true });
+</script>
 </body>
 </html>
